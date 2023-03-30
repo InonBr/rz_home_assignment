@@ -835,6 +835,11 @@ simple-update-notifier@^1.0.7:
   dependencies:
     semver "~7.0.0"
 
+ssl-checker@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/ssl-checker/-/ssl-checker-2.0.8.tgz#eb50cd3174be0fb7efc68bc23fc5716d7dc677bc"
+  integrity sha512-pIDGxablZowKR/elbm72Wk7T3lEdrcAKT4ltPsdQrpm7N6EIIvuFQpIcMNG+A/wmiymcRwFDzTd83bW6Yy5LKQ==
+
 statuses@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-2.0.1.tgz#55cb000ccf1d48728bd23c685a063998cf1a1b63"
