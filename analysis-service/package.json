@@ -8,7 +8,6 @@
     "axios": "^1.3.4",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "rmq-package": "../rmq-package",
     "ssl-checker": "^2.0.8",
     "ts-node": "^10.9.1",
     "whoiser": "^1.16.0"

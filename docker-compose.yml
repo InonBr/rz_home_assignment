@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  analysis-service:
+    build:
+      context: ./analysis-service
+      dockerfile: Dockerfile
+    image: analysis-service
+    ports:
+      - "5001:5001"
+    env_file: ./analysis-service/.env
