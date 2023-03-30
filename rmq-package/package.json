@@ -1,5 +1,5 @@
 {
-  "name": "rmq-package",
+  "name": "@inonbr/rmq-package",
   "version": "1.0.0",
   "main": "index.ts",
   "license": "MIT",
