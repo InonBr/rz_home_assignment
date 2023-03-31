@@ -11,3 +11,8 @@ export const addNewDomain = async (domain: string) => {
 
   return { id: _id.toString(), addedDate, status };
 };
+
+export const findDomain = async (domain: string) =>
+  await DomainsModel.findOne({
+    domain,
+  });
