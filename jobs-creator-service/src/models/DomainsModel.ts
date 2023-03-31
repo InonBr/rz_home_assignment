@@ -6,6 +6,7 @@ const DomainsModel = new mongoose.Schema({
   domain: {
     type: String,
     required: true,
+    unique: true,
   },
   status: {
     type: "pending" || "processing" || "done",

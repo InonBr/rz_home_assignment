@@ -16,12 +16,14 @@
     "ssl-checker": "^2.0.8",
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
-    "whoiser": "^1.16.0"
+    "whoiser": "^1.16.0",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.1",
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.11",
+    "@types/yup": "^0.32.0",
     "nodemon": "^2.0.22",
     "typescript": "^5.0.2"
   }
