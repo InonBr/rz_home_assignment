@@ -892,6 +892,11 @@ sparse-bitfield@^3.0.3:
   dependencies:
     memory-pager "^1.0.2"
 
+ssl-checker@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/ssl-checker/-/ssl-checker-2.0.8.tgz#eb50cd3174be0fb7efc68bc23fc5716d7dc677bc"
+  integrity sha512-pIDGxablZowKR/elbm72Wk7T3lEdrcAKT4ltPsdQrpm7N6EIIvuFQpIcMNG+A/wmiymcRwFDzTd83bW6Yy5LKQ==
+
 statuses@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-2.0.1.tgz#55cb000ccf1d48728bd23c685a063998cf1a1b63"
@@ -1017,6 +1022,13 @@ whatwg-url@^11.0.0:
   dependencies:
     tr46 "^3.0.0"
     webidl-conversions "^7.0.0"
+
+whoiser@^1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/whoiser/-/whoiser-1.16.0.tgz#c16e9eb03ef23da699ee64420050adf3174b327b"
+  integrity sha512-bO75zkColwjMz7eLOfa0Vcps1IaXlQGFJ0OaGXMvh37/aIKHHv4kJvNlfIo7qHfBt5he8SDWZVULOoGHs0XnOg==
+  dependencies:
+    punycode "^2.1.1"
 
 yn@3.1.1:
   version "3.1.1"

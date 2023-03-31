@@ -12,6 +12,8 @@ export const getVirusTotalDataForDomain = async (domain: string) => {
       },
     });
 
+    console.log(data);
+
     return data;
   } catch (err) {
     if (err instanceof AxiosError) {

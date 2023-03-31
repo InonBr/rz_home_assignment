@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import { port } from "./config";
+import { getVirusTotalDataForDomain } from "./systems/virusTotalData";
 // import { receiveMsgFromQueue } from "../../rmq-package/dist";
 
 const app: Express = express();
