@@ -10,11 +10,13 @@
     "express": "^4.18.2",
     "ssl-checker": "^2.0.8",
     "ts-node": "^10.9.1",
+    "tsc": "^2.0.4",
     "whoiser": "^1.16.0"
   },
   "scripts": {
     "start:nodemon": "nodemon ./src/app.ts",
-    "start": "node --loader ts-node/esm ./src/app.ts"
+    "start": "node --loader ts-node/esm ./src/app.ts",
+    "tsc": "tsc --init"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.1",

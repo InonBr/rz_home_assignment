@@ -1,4 +1,4 @@
-import { virusTotalApi, virusTotalToken } from "../src/config";
+import { virusTotalApi, virusTotalToken } from "../config";
 import axios, { AxiosError } from "axios";
 
 export const getVirusTotalDataForDomain = async (domain: string) => {
