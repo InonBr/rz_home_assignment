@@ -1,3 +1,5 @@
+import { Document } from "mongoose";
+
 export interface VirusTotalDataInterface {
   attributes: {
     last_dns_records: Array<any>;

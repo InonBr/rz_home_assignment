@@ -1,6 +1,4 @@
 import mongoose, { Types } from "mongoose";
-import { IResolvedValues, VirusTotalDataInterface } from "../systems/ustils";
-import { WhoisSearchResult } from "whoiser";
 
 const DomainsModel = new mongoose.Schema({
   domain: {
@@ -9,19 +7,21 @@ const DomainsModel = new mongoose.Schema({
     unique: true,
   },
   status: {
-    type: "pending" || "processing" || "done",
+    type: String,
+    enum: ["pending", "done"],
     required: true,
+    default: "pending",
   },
   sslData: {
-    type: Types.DocumentArray<IResolvedValues>,
+    type: Object,
     required: false,
   },
   whoisData: {
-    type: Types.DocumentArray<WhoisSearchResult>,
+    type: Object,
     required: false,
   },
   virusTotalData: {
-    type: Types.DocumentArray<VirusTotalDataInterface>,
+    type: Object,
     required: false,
   },
   addedDate: {

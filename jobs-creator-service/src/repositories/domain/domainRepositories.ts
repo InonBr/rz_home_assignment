@@ -1,0 +1,13 @@
+import DomainsModel from "../../models/DomainsModel";
+
+export const addNewDomain = async (domain: string) => {
+  const newDomain = new DomainsModel({
+    domain,
+  });
+
+  await newDomain.save();
+
+  const { _id, addedDate, status } = newDomain;
+
+  return { id: _id.toString(), addedDate, status };
+};

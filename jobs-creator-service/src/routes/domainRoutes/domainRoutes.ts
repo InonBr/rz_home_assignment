@@ -4,6 +4,7 @@ import {
   DomainBodySchemaType,
   domainBodySchema,
 } from "./domainRoutes.interface";
+import { addNewDomain } from "../../repositories/domain/domainRepositories";
 
 const domainRouter = Router();
 
@@ -11,11 +12,21 @@ domainRouter.post(
   "/domain",
   validateSchema(domainBodySchema),
   async (req: Request<{}, {}, DomainBodySchemaType>, res: Response) => {
-    const { domain } = req.body;
+    try {
+      const { domain } = req.body;
 
-    console.log(domain);
+      const { addedDate, id, status } = await addNewDomain(domain);
 
-    res.send(domain);
+      res.send({ addedDate, id, status, domain });
+    } catch (err) {
+      if (err instanceof Error) {
+        if (err.message.includes("duplicate key error")) {
+          res.status(400).json({ msg: "the domain already exists" });
+        }
+
+        res.status(500).json({ msg: err.message });
+      }
+    }
   }
 );
 
