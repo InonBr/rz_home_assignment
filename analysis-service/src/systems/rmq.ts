@@ -1,13 +1,25 @@
 import { connect } from "amqplib/callback_api";
+import { DomainObjectInterface, IResolvedValues } from "./interfaces";
+import { WhoisSearchResult } from "whoiser";
 
 export const receiveMsgFromQueue = ({
-  msg,
   queueName,
   amqpHost,
+  analysisFunc,
 }: {
-  msg: any;
   queueName: string;
   amqpHost: string;
+  analysisFunc: (domainArr: Array<DomainObjectInterface>) => Promise<
+    {
+      sslData?: IResolvedValues;
+      whoisData?: WhoisSearchResult;
+      virusTotalData?: WhoisSearchResult;
+      status: string;
+      _id: string;
+      domain: string;
+      addedDate: string;
+    }[]
+  >;
 }) => {
   connect(amqpHost, (err: Error, connection) => {
     if (err) {
@@ -27,14 +39,18 @@ export const receiveMsgFromQueue = ({
 
       channel.consume(
         queueName,
-        async () => {
+        async (msg) => {
           if (msg) {
             console.debug(
               `Received message from queue: ${msg.content.toString()}`
             );
-            const data: any = JSON.parse(msg.content.toString());
+            const data: { data: Array<DomainObjectInterface> } = JSON.parse(
+              msg.content.toString()
+            );
 
-            console.log(data);
+            await analysisFunc(data.data);
+
+            // Promise.allSettled;
           }
         },
         {
@@ -70,9 +86,14 @@ export const sendDataToQueue = ({
         durable: false,
       });
 
-      console.debug(`Sending message to queue: ${JSON.stringify(msg)}`);
+      console.debug(
+        `Sending message to queue: ${JSON.stringify({ data: msg })}`
+      );
 
-      channel.sendToQueue(queueName, Buffer.from(JSON.stringify(msg)));
+      channel.sendToQueue(
+        queueName,
+        Buffer.from(JSON.stringify({ data: msg }))
+      );
     });
   });
 };

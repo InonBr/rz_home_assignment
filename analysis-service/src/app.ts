@@ -1,14 +1,16 @@
 import express, { Express } from "express";
-import { port } from "./config";
-import { getVirusTotalDataForDomain } from "./systems/virusTotalData";
-// import { receiveMsgFromQueue } from "../../rmq-package/dist";
+import { amqpHost, analysisQueue, port } from "./config";
+import { receiveMsgFromQueue } from "./systems/rmq";
+import { getDataFromDomain } from "./analysis/analysis";
 
 const app: Express = express();
 
-// receiveMsgFromQueue;
-// getVirusTotalDataForDomain("google.com");
-// getWhoisData("google.com");
-// getSslDetails("google.com");
+receiveMsgFromQueue({
+  amqpHost,
+  queueName: analysisQueue,
+  // @ts-ignore
+  analysisFunc: getDataFromDomain,
+});
 
 app.listen(port, () => {
   console.log(`🟢 App listening at http://localhost:${port}`);

@@ -1,9 +1,9 @@
-FROM node:lts-alpine
+FROM node:lts-alpine 
 
 WORKDIR /analysis-service
 
 COPY . .
-COPY package.json ./
+COPY .package*.json ./
 COPY .env ./
 
 RUN yarn install
