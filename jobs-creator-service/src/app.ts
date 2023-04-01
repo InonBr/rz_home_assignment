@@ -4,6 +4,7 @@ import connectDB from "./systems/dBConnection";
 import domainRouter from "./routes/domainRoutes/domainRoutes";
 import { cronJob } from "./cronJob/cronJob";
 import { receiveMsgFromQueue } from "./systems/rmq";
+import { updateDomainsByQueue } from "./cronJob/domainUpdater";
 
 const app: Express = express();
 
@@ -18,6 +19,7 @@ cronJob().catch((err: Error) => {
 receiveMsgFromQueue({
   amqpHost,
   queueName: jobsCreatorQueue,
+  updateDomainsFunc: updateDomainsByQueue,
 });
 
 connectDB().then(() => {

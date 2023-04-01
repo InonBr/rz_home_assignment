@@ -1,11 +1,14 @@
 import { connect } from "amqplib/callback_api";
+import { QueueObjectInterface } from "./utils";
 
 export const receiveMsgFromQueue = ({
   queueName,
   amqpHost,
+  updateDomainsFunc,
 }: {
   queueName: string;
   amqpHost: string;
+  updateDomainsFunc: (dataArr: QueueObjectInterface[]) => void;
 }) => {
   connect(amqpHost, (err: Error, connection) => {
     if (err) {
@@ -32,7 +35,7 @@ export const receiveMsgFromQueue = ({
             );
             const data: any = JSON.parse(msg.content.toString());
 
-            console.log(data);
+            updateDomainsFunc(data.data);
           }
         },
         {

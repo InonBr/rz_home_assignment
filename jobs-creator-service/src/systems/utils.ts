@@ -1,3 +1,5 @@
+import { WhoisSearchResult } from "whoiser";
+
 export interface VirusTotalDataInterface {
   attributes: {
     last_dns_records: Array<any>;
@@ -32,4 +34,14 @@ export interface IResolvedValues {
   validTo: string;
   daysRemaining: number;
   validFor: string[];
+}
+
+export interface QueueObjectInterface {
+  _id: string;
+  domain: string;
+  status: "pending" | "done";
+  addedDate: string;
+  sslData: IResolvedValues;
+  whoisData: WhoisSearchResult;
+  virusTotalData: VirusTotalDataInterface;
 }
