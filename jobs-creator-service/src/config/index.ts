@@ -15,3 +15,7 @@ export const analysisQueue = process.env.ANALYSIS_QUEUE
   : "analysis_service_queue";
 
 export const amqpHost = process.env.AMQP_HOST ? process.env.AMQP_HOST : "";
+
+export const jobsCreatorQueue = process.env.JOBS_CREATOR_QUEUE
+  ? process.env.JOBS_CREATOR_QUEUE
+  : "jobs_creator_queue";

@@ -49,8 +49,6 @@ export const receiveMsgFromQueue = ({
             );
 
             await analysisFunc(data.data);
-
-            // Promise.allSettled;
           }
         },
         {

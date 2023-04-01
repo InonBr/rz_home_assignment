@@ -1,12 +1,18 @@
 import sslChecker from "ssl-checker";
-import { virusTotalApi, virusTotalToken } from "../config";
+import {
+  amqpHost,
+  jobsCreatorQueue,
+  virusTotalApi,
+  virusTotalToken,
+} from "../config";
 import axios, { AxiosError } from "axios";
 import whoiser from "whoiser";
 import { DomainObjectInterface } from "../systems/interfaces";
+import { sendDataToQueue } from "../systems/rmq";
 
 const getSslDetails = async (domain: string) => {
   try {
-    return await sslChecker("google.com");
+    return await sslChecker(domain);
   } catch (err) {
     if (err instanceof Error) {
       console.error(err.message);
@@ -47,19 +53,27 @@ const getWhoisData = async (domain: string) => {
 export const getDataFromDomain = async (
   domainArr: Array<DomainObjectInterface>
 ) => {
-  const domainData = await Promise.all(
-    domainArr.map(async (domain) => {
-      return {
-        ...domain,
-        sslData: await getSslDetails(domain.domain),
-        whoisData: await getWhoisData(domain.domain),
-        virusTotalData: await getVirusTotalDataForDomain(domain.domain),
-        status: "done",
-      };
-    })
-  );
+  try {
+    const domainData = await Promise.all(
+      domainArr.map(async (domain) => {
+        return {
+          ...domain,
+          sslData: await getSslDetails(domain.domain),
+          whoisData: await getWhoisData(domain.domain),
+          virusTotalData: await getVirusTotalDataForDomain(domain.domain),
+          status: "done",
+        };
+      })
+    );
 
-  console.log(domainData);
-
-  return domainData;
+    await sendDataToQueue({
+      amqpHost,
+      queueName: jobsCreatorQueue,
+      msg: domainData,
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(err.message);
+    }
+  }
 };

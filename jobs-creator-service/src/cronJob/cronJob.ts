@@ -5,7 +5,7 @@ import { amqpHost, analysisQueue } from "../config";
 
 export const cronJob = () => {
   return new Promise((resolve, reject) => {
-    schedule("*/10 * * * *", async () => {
+    schedule("0 10 1 * *", async () => {
       try {
         const pendingDomains = await findPendingDomains();
 
