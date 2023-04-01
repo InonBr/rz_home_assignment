@@ -1,6 +1,6 @@
 FROM node:lts-alpine 
 
-WORKDIR /analysis-service
+WORKDIR /jobs-creator-service
 
 COPY . .
 COPY .package*.json ./
@@ -8,6 +8,8 @@ COPY .env ./
 
 RUN yarn install
 
-EXPOSE 5001
+ENV DOCKER=db
+
+EXPOSE 5000
 
 CMD ["yarn", "start"]
