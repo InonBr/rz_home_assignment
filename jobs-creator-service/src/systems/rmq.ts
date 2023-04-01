@@ -1,11 +1,9 @@
 import { connect } from "amqplib/callback_api";
 
 export const receiveMsgFromQueue = ({
-  msg,
   queueName,
   amqpHost,
 }: {
-  msg: any;
   queueName: string;
   amqpHost: string;
 }) => {
@@ -27,7 +25,7 @@ export const receiveMsgFromQueue = ({
 
       channel.consume(
         queueName,
-        async () => {
+        async (msg) => {
           if (msg) {
             console.debug(
               `Received message from queue: ${msg.content.toString()}`

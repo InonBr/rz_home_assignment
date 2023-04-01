@@ -1,6 +1,5 @@
 import { connect } from "amqplib/callback_api";
-import { DomainObjectInterface, IResolvedValues } from "./interfaces";
-import { WhoisSearchResult } from "whoiser";
+import { DomainObjectInterface } from "./interfaces";
 
 export const receiveMsgFromQueue = ({
   queueName,
@@ -9,17 +8,7 @@ export const receiveMsgFromQueue = ({
 }: {
   queueName: string;
   amqpHost: string;
-  analysisFunc: (domainArr: Array<DomainObjectInterface>) => Promise<
-    {
-      sslData?: IResolvedValues;
-      whoisData?: WhoisSearchResult;
-      virusTotalData?: WhoisSearchResult;
-      status: string;
-      _id: string;
-      domain: string;
-      addedDate: string;
-    }[]
-  >;
+  analysisFunc: (domainArr: Array<DomainObjectInterface>) => Promise<void>;
 }) => {
   connect(amqpHost, (err: Error, connection) => {
     if (err) {

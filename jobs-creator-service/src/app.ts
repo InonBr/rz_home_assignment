@@ -1,8 +1,9 @@
 import express, { Express } from "express";
-import { port } from "./config";
+import { amqpHost, jobsCreatorQueue, port } from "./config";
 import connectDB from "./systems/dBConnection";
 import domainRouter from "./routes/domainRoutes/domainRoutes";
 import { cronJob } from "./cronJob/cronJob";
+import { receiveMsgFromQueue } from "./systems/rmq";
 
 const app: Express = express();
 
@@ -12,6 +13,11 @@ app.use("/api", domainRouter);
 
 cronJob().catch((err: Error) => {
   console.error(err);
+});
+
+receiveMsgFromQueue({
+  amqpHost,
+  queueName: jobsCreatorQueue,
 });
 
 connectDB().then(() => {

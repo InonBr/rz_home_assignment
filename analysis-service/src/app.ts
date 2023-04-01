@@ -8,7 +8,6 @@ const app: Express = express();
 receiveMsgFromQueue({
   amqpHost,
   queueName: analysisQueue,
-  // @ts-ignore
   analysisFunc: getDataFromDomain,
 });
 
