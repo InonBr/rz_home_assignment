@@ -6,11 +6,7 @@ import { DomainObjectInterface } from "../systems/interfaces";
 
 const getSslDetails = async (domain: string) => {
   try {
-    const x = await sslChecker("google.com");
-
-    console.log(x);
-
-    return x;
+    return await sslChecker("google.com");
   } catch (err) {
     if (err instanceof Error) {
       console.error(err.message);
@@ -53,19 +49,11 @@ export const getDataFromDomain = async (
 ) => {
   const domainData = await Promise.all(
     domainArr.map(async (domain) => {
-      console.log(domain.domain);
-      console.log(domain.domain);
-      console.log(domain.domain);
-
-      const sslData = await getSslDetails(domain.domain);
-      //   const whoisData = await getVirusTotalDataForDomain(domain.domain);
-      //   const virusTotalData = await getWhoisData(domain.domain);
-
       return {
         ...domain,
-        sslData,
-        // whoisData,
-        // virusTotalData,
+        sslData: await getSslDetails(domain.domain),
+        whoisData: await getWhoisData(domain.domain),
+        virusTotalData: await getVirusTotalDataForDomain(domain.domain),
         status: "done",
       };
     })

@@ -1,8 +1,11 @@
 import DomainsModel from "../../models/DomainsModel";
 
 export const addNewDomain = async (domain: string) => {
+  const url = new URL(domain);
+  const domainToAdd = url.hostname.replace("www.", "");
+
   const newDomain = new DomainsModel({
-    domain,
+    domain: domainToAdd,
   });
 
   await newDomain.save();
@@ -15,7 +18,7 @@ export const addNewDomain = async (domain: string) => {
 export const findDomain = async (domain: string) =>
   await DomainsModel.findOne({
     domain,
-  });
+  }).select("-__v");
 
 export const findPendingDomains = async () =>
-  await DomainsModel.find({ status: "pending" });
+  await DomainsModel.find({ status: "pending" }).select("-__v");
