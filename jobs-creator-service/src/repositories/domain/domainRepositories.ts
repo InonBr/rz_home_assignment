@@ -16,3 +16,6 @@ export const findDomain = async (domain: string) =>
   await DomainsModel.findOne({
     domain,
   });
+
+export const findPendingDomains = async () =>
+  await DomainsModel.find({ status: "pending" });
